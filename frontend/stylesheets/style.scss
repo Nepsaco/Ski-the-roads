@@ -1,0 +1,8 @@
+@import 'colorPallet';
+@import 'font';
+@import 'reset';
+
+body {
+    font-family: $font-stack;
+    font-size: $font_M;
+}
