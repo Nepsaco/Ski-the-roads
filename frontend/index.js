@@ -1,12 +1,11 @@
-// const heroMap = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&callback=initMap`
-const id = 32
 const container = document.querySelector('#cardContainer')
 const hero = document.querySelector('#heroContainer')
+let myMap = ''
 
 getMountainId()
     .then(mountains => mapMountains(mountains, createCard))
-// loadScript(heroMap)
-// addMarker()
+getApiKey()
+    .then(loadScript)
 
 
 
@@ -49,6 +48,8 @@ function createHero(mountain){
 
     appendElement(hero, heroCard)
     appendElement(heroCard, h2, ul)
+
+    addMarker(myMap, {lat: mountain.latitude, lng: mountain.longitude})
     return heroCard
 }
 
@@ -82,25 +83,33 @@ function getMountainInfo(mountain_id){
         .then(handleResponse)
 }
 
-// function initMap(){
-//     const colorado = {lat:39.113, lng:-105.358}
-//     const mapProp = {
-//         center: colorado,
-//         zoom: 7
-//     }
-//     const map = new google.maps.Map(document.getElementById('map'), mapProp)
-// }
+function getApiKey(){
+    return fetch('http://localhost:9000/')
+        .then(handleResponse)
+}
 
-// function loadScript(src) {
-//     let script = document.createElement('script');
-//     script.src = src;
-//     script.async = false;
-//     document.body.append(script);
-// }
+function initMap(){
+    const colorado = {lat:39.113, lng:-105.358}
+    const mapProp = {
+        center: colorado,
+        zoom: 7
+    }
+    const map = new google.maps.Map(document.getElementById('map'), mapProp)
+    myMap = map
+}
 
-// function addMarker(coordinates){
-//     const marker = new google.maps.Marker({
-//         position:coordinates,
-//         map:map,
-//     })
-// }
+function loadScript(key) {
+    const API_KEY = key.key
+    let script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&callback=initMap`
+    script.async = false;
+    document.body.append(script);
+}
+
+function addMarker(map, latLngObject){
+    console.log('marker', myMap)
+    const marker = new google.maps.Marker({
+        position: latLngObject,
+        map:myMap,
+    })
+}
