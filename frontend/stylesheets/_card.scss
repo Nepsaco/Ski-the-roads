@@ -5,11 +5,18 @@
     justify-content: space-between;
 
     .mountainCard {
-        flex: 1;
+        width: 20%;
         background-color: $primary_70;
         font-size: $font_M;
-        margin: 4rem;
         padding: 4rem;
+        margin:4rem;
         border: 2px, solid, $primary_40;
+
+        label {
+            font-size: $font_XXL;
+            width: 100%;
+            height: 100%;
+
+        }
     }
 }
