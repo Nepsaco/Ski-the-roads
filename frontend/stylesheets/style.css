@@ -64,7 +64,22 @@ header {
     padding: 0.5rem; }
 
 body {
-  background-color: #d2dff9; }
+  background-color: #d2dff9;
+  font-family: "Overpass", sans-serif;
+  color: #16439c; }
+
+#cardContainer {
+  width: 100%;
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-between; }
+  #cardContainer .mountainCard {
+    flex: 1;
+    background-color: #bccff5;
+    font-size: 1.25rem;
+    margin: 4rem;
+    padding: 4rem;
+    border: 2px, solid, #3670e2; }
 
 #map {
   height: 400px;

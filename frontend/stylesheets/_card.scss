@@ -1,0 +1,15 @@
+#cardContainer {
+    width: 100%;
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-between;
+
+    .mountainCard {
+        flex: 1;
+        background-color: $primary_70;
+        font-size: $font_M;
+        margin: 4rem;
+        padding: 4rem;
+        border: 2px, solid, $primary_40;
+    }
+}
