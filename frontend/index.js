@@ -5,6 +5,7 @@ let directionsRenderer
 let directionsService
 let stepDisplay
 let markerArray = []
+let latLngObject
 
 
 getMountainId()
@@ -41,6 +42,7 @@ function createHero(mountain){
     const heroCard = document.createElement('div')
     const h2 = document.createElement('h2')
     const ul = document.createElement('ul')
+    const directions = document.createElement('div')
 
     heroCard.className = 'heroCard'
     h2.textContent = mountain.name
@@ -50,12 +52,13 @@ function createHero(mountain){
     <li>Skiable Acreage: ${mountain.skiable_acreage} acres</li>
     <li>Website: <a href="${mountain.official_website}" target="_black">Click to visit</a></li>`
 
+    directions.id = 'right-panel'
 
     appendElement(hero, heroCard)
-    appendElement(heroCard, h2, ul)
+    appendElement(heroCard, h2, ul, directions)
 
-    // addMarker(myMap, {lat: mountain.latitude, lng: mountain.longitude})
     calcRoute({lat: mountain.latitude, lng: mountain.longitude})
+
     return heroCard
 }
 
@@ -90,11 +93,13 @@ function getMountainInfo(mountain_id){
 }
 
 function getApiKey(){
+    // dont push to production
     return fetch('http://localhost:9000/')
         .then(handleResponse)
 }
 
 function initMap(){
+    directionsRenderer = new google.maps.DirectionsRenderer()
     directionsService = new google.maps.DirectionsService()
 
     const colorado = {lat:39.113, lng:-105.358}
@@ -105,14 +110,9 @@ function initMap(){
 
     myMap = new google.maps.Map(document.getElementById('map'), mapProp)
 
-    let rendererOptions = {
-        map: myMap
-    }
-
-    directionsRenderer = new google.maps.DirectionsRenderer(rendererOptions)
-
-    setpDisplay = new google.maps.InfoWindow()
+    directionsRenderer.setMap(myMap)
 }
+
 
 function loadScript(key) {
     const API_KEY = key.key
@@ -122,16 +122,20 @@ function loadScript(key) {
     document.body.append(script);
 }
 
-function addMarker(latLngObject){
-    const marker = new google.maps.Marker({
-        setPosition:latLngObject,
-        map:myMap,
-    })
-    markerArray.push(marker)
-}
+// function addMarker(latLngObject){
+//     const marker = new google.maps.Marker({
+//         setPosition:latLngObject,
+//         map:myMap,
+//     })
+//     markerArray.push(marker)
+// }
 
 function calcRoute(latLngObject) {
-    markerArray.map(marker => marker.setMap(null))
+
+    // markerArray.map(marker => {
+    //     console.log(marker)
+    //     marker.setMap(null)
+    // })
 
     var start = {lat:39.7392, lng:-104.9903}
     var request = {
@@ -146,15 +150,30 @@ function calcRoute(latLngObject) {
 
     directionsService.route(request, function(result, status) {
         if (status == 'OK') {
+            directionsRenderer.setPanel(null)
+           directionsRenderer.setPanel(document.getElementById('right-panel'))
             directionsRenderer.setDirections(result);
         }
     });
 }
 
-function attachInstructionText(marker, text){
-    google.maps.event.addListenter(marker, 'click', () => {
-        stepDisplay.setContent(text)
-        stepDisplay.open(myMap, marker)
-    })
-}
+// function showSteps(directionResult) {
+//     var myRoute = directionResult.routes[0].legs[0];
+
+//     for (var i = 0; i < myRoute.steps.length; i++) {
+//         var marker = new google.maps.Marker({
+//             position: myRoute.steps[i].start_point,
+//             map: myMap
+//         });
+//         attachInstructionText(marker, myRoute.steps[i].instructions);
+//         markerArray[i] = marker;
+//     }
+// }
+
+// function attachInstructionText(marker, text){
+//     google.maps.event.addListenter(marker, 'click', () => {
+//         stepDisplay.setContent(text)
+//         stepDisplay.open(myMap, marker)
+//     })
+// }
 
