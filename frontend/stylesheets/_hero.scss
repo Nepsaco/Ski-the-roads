@@ -3,14 +3,16 @@
 
     .heroCard {
         font-size: $font_XL;
-        padding: 4rem;
+        display: flex;
+        height: 100%;
 
         h2 {
             font-size: $font_XXL;
+            padding: 4rem;
         }
 
         ul{
-            padding-top: 2rem;
+            padding: 4rem;
 
             li{
                 color: $primary_70;
@@ -20,6 +22,14 @@
                 text-decoration: none;
                 color: $primary_20;
             }
+        }
+
+        #right-panel {
+            overflow: auto;
+            height: 25rem;
+            width: 50%;
+            display: block;
+            background-color: white;
         }
     }
 }
