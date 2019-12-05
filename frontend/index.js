@@ -1,6 +1,11 @@
 const container = document.querySelector('#cardContainer')
 const hero = document.querySelector('#heroContainer')
-let myMap = ''
+let myMap
+let directionsRenderer
+let directionsService
+let stepDisplay
+let markerArray = []
+
 
 getMountainId()
     .then(mountains => mapMountains(mountains, createCard))
@@ -49,7 +54,8 @@ function createHero(mountain){
     appendElement(hero, heroCard)
     appendElement(heroCard, h2, ul)
 
-    addMarker(myMap, {lat: mountain.latitude, lng: mountain.longitude})
+    // addMarker(myMap, {lat: mountain.latitude, lng: mountain.longitude})
+    calcRoute({lat: mountain.latitude, lng: mountain.longitude})
     return heroCard
 }
 
@@ -89,13 +95,23 @@ function getApiKey(){
 }
 
 function initMap(){
+    directionsService = new google.maps.DirectionsService()
+
     const colorado = {lat:39.113, lng:-105.358}
     const mapProp = {
         center: colorado,
         zoom: 7
     }
-    const map = new google.maps.Map(document.getElementById('map'), mapProp)
-    myMap = map
+
+    myMap = new google.maps.Map(document.getElementById('map'), mapProp)
+
+    let rendererOptions = {
+        map: myMap
+    }
+
+    directionsRenderer = new google.maps.DirectionsRenderer(rendererOptions)
+
+    setpDisplay = new google.maps.InfoWindow()
 }
 
 function loadScript(key) {
@@ -106,10 +122,39 @@ function loadScript(key) {
     document.body.append(script);
 }
 
-function addMarker(map, latLngObject){
-    console.log('marker', myMap)
+function addMarker(latLngObject){
     const marker = new google.maps.Marker({
-        position: latLngObject,
+        setPosition:latLngObject,
         map:myMap,
     })
+    markerArray.push(marker)
 }
+
+function calcRoute(latLngObject) {
+    markerArray.map(marker => marker.setMap(null))
+
+    var start = {lat:39.7392, lng:-104.9903}
+    var request = {
+        origin: start,
+        destination: latLngObject,
+        travelMode: 'DRIVING', 
+        drivingOptions: {
+            departureTime: new Date(Date.now() + 10), 
+            trafficModel: 'pessimistic'
+        }
+    };
+
+    directionsService.route(request, function(result, status) {
+        if (status == 'OK') {
+            directionsRenderer.setDirections(result);
+        }
+    });
+}
+
+function attachInstructionText(marker, text){
+    google.maps.event.addListenter(marker, 'click', () => {
+        stepDisplay.setContent(text)
+        stepDisplay.open(myMap, marker)
+    })
+}
+
