@@ -16,7 +16,6 @@ displayFavorites()
 
 // DOM Functions
 
-
 function createCard(mountain){
     const card = document.createElement('div')
     const label = document.createElement('label')
@@ -54,8 +53,7 @@ function createHero(mountain){
     directions.id = 'right-panel'
     button.textContent = 'Add To Favories'
     button.id = mountain.id
-
-    toggleClass(hero)
+    hero.className = ''
 
     appendElement(hero, heroCard)
     appendElement(heroCard, h2, ul, directions)
@@ -63,6 +61,8 @@ function createHero(mountain){
 
     button.addEventListener('click', handleFavoriteClick)
     calcRoute({lat: mountain.latitude, lng: mountain.longitude})
+
+    return heroCard
 }
 
 function clearHero(element){
@@ -109,17 +109,17 @@ async function makeFavoriteCard(favorite){
 
 async function favoriteCardClick(event){
     const modal = document.querySelector('#modal')
+    const heroCard = document.querySelector('.heroCard')
     let mountain = await getMountainInfo(event.target.id)
     
     modal.addEventListener('click', event => {
-        if (event.target.id === 'modal' || Number.isInteger(parseInt(event.target.id))){
-            if(event.target.id === 'modal'){
-                toggleClass(modal)
-            } else {
-                toggleClass(modal)
-                createHero(mountain)
-            }
-        }   
+        if(event.target.id === 'modal'){
+            toggleClass(modal)
+        } else if (Number.isInteger(parseInt(event.target.id))){
+            createHero(mountain)
+            clearHero(heroCard)
+            toggleClass(modal)
+        }
     })
 }
 
