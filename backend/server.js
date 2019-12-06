@@ -11,7 +11,12 @@ app.use(cors())
 
 app.listen(port, () => console.log(`listening on ${port}`))
 
-app.get('/mountains', (request, response) =>{
+app.get('/users', (request, response) => {
+    queries.getAll()
+        .then(users => response.send(users))
+})
+
+app.get('/mountains', (request, response) => {
     queries.getAllMountain_Ids()
         .then(mountains => response.send(mountains))
 })
@@ -19,3 +24,10 @@ app.get('/mountains', (request, response) =>{
 app.get('/', (request, response) => {
     response.send({key: process.env.API_KEY})
 })
+
+app.post('/favorites', (request, response) => {
+    queries.createFavorite(request.body)
+        .then(favorite => response.json(favorite))
+})
+
+
