@@ -35,4 +35,5 @@ SCSS
 Javascript
 [Google API](https://cloud.google.com/maps-platform/)
 [SkiMaps.org](https://skimap.org/)
-Authors Seth Maisel Tobie Tsuzuki
+Author
+Tobie Tsuzuki
