@@ -30,10 +30,10 @@ Deploy with heroku
 
 Built With
 
-Node.js . 
-SASS . 
-Javascript . 
-[Google API](https://cloud.google.com/maps-platform/) . 
-[SkiMaps.org](https://skimap.org/) . 
-Author . 
+Node.js\
+SASS\
+Javascript\  
+[Google API](https://cloud.google.com/maps-platform/) \
+[SkiMaps.org](https://skimap.org/) \
+Author \
 Tobie Tsuzuki
