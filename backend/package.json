@@ -1,24 +1,27 @@
 {
-  "name": "Ski-the-Roads",
-  "version": "1.0.0",
-  "description": "",
-  "main": "sever.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "knex": "^0.20.3",
-    "pg": "^7.14.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.1"
-  }
+    "name": "Ski-the-Roads",
+    "version": "1.0.0",
+    "description": "",
+    "main": "sever.js",
+    "engines": {
+        "node": "13.3.0"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon server.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "knex": "^0.20.3",
+        "pg": "^7.14.0"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.1"
+    }
 }
