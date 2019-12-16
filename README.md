@@ -14,7 +14,7 @@ You will need a Google API key that has access to the Direction and Maps service
 You will also need to add a .env file in the backend folder and create a variable
 example: 
 
-API_KEY = '${YOUR API KEY HERE}'
+`API_KEY = '${YOUR API KEY HERE}'`
 
 Functionality
 
@@ -30,9 +30,10 @@ Deploy with heroku
 
 Built With
 
-Node.js
-SCSS
-Javascript
-[Google API](https://cloud.google.com/maps-platform/)
-[SkiMaps.org](https://skimap.org/)
-Authors Seth Maisel Tobie Tsuzuki
+Node.js\
+SASS\
+Javascript\  
+[Google API](https://cloud.google.com/maps-platform/) \
+[SkiMaps.org](https://skimap.org/) \
+Author \
+Tobie Tsuzuki
