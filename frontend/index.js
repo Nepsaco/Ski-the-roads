@@ -80,6 +80,7 @@ function displayFavorites(){
     const favButton = document.querySelector('#favorites')
     const modal = document.querySelector('#modal')
     favButton.addEventListener('click', event => {
+        modal.addEventListener('click', favoriteCardClick)
         toggleClass(modal)
         getUserAndFavorites()
             .then(users => mapArray(users[0].favorites, makeFavoriteCard))
@@ -102,7 +103,7 @@ async function makeFavoriteCard(favorite){
     card.id = mountain.id
 
 
-    modal.addEventListener('click',favoriteCardClick)
+    // modal.addEventListener('click',favoriteCardClick)
     appendElement(card, h2)
     appendElement(modalGuts, card)
 }
@@ -113,7 +114,7 @@ async function favoriteCardClick(event){
     let mountain = await getMountainInfo(event.target.id)
     
     modal.addEventListener('click', event => {
-        if(event.target.id === 'modal'){
+        if(event.target.id == 'modal'){
             toggleClass(modal)
         } else if (Number.isInteger(parseInt(event.target.id))){
             createHero(mountain)
@@ -129,7 +130,6 @@ function toggleClass(element){
     } else {
         element.className = 'hidden'
     }
-
 }
 
 // Backend functions
