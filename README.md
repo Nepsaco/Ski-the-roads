@@ -1,5 +1,5 @@
 # Ski-the-roads
-A wayfinder app to Colorados ski resorts. Find all the information you need to find the perfect ski spots. 
+A wayfinder app to Colorados ski resorts. Find all the information you need to find the perfect ski spots. Demo video can be found [here](https://www.youtube.com/watch?v=enI4Y9iDdlA&feature=youtu.be).
 
 Getting Started
 
@@ -33,7 +33,7 @@ Built With
 Node.js\
 SASS\
 Javascript\  
-[Google API](https://cloud.google.com/maps-platform/) \
-[SkiMaps.org](https://skimap.org/) \
-Author \
+[Google API](https://cloud.google.com/maps-platform/)\
+[SkiMaps.org](https://skimap.org/)\
+Author\
 Tobie Tsuzuki
