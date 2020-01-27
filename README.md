@@ -32,7 +32,7 @@ Built With
 
 Node.js\
 SASS\
-Javascript\  
+Javascript  
 [Google API](https://cloud.google.com/maps-platform/)\
 [SkiMaps.org](https://skimap.org/)\
 Author\
